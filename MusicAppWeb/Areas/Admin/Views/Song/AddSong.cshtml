@@ -1,0 +1,51 @@
+﻿@using MusicAppWeb.CrudModels
+@model SongModelForAdding
+@{
+    ViewData["Title"] = "AddSong";
+    Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
+}
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Müzik Bilgileri Formu</h2>
+    <form>
+            <div class="mb-3">
+                <label for="songName" class="form-label">Şarkı Adı</label>
+                <input type="text" class="form-control" id="songName" placeholder="Şarkı adını girin">
+            </div>
+        <div class="mb-3">
+            <label for="artist" class="form-label">Sanatçı</label>
+            <select class="form-select" id="artist">
+                <option selected>Sanatçı Seçin</option>
+                @foreach (var artist in ViewBag.Artists)
+                {
+                    <option value="@artist.Id">@artist.Name @artist.Surname</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="albums" class="form-label">Albumler</label>
+            <select class="form-select" id="artist">
+                <option selected>Albüm Seçin</option>
+                @foreach (var album in ViewBag.Albums)
+                {
+                    <option value="@album.Id">@album.Name</option>
+                }
+            </select>
+        </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Tür</label>
+                <select class="form-select" id="genre">
+                @foreach (var genre in ViewBag.Genres)
+                {
+                    <option value="@genre.Id">@genre.Name</option>
+                }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Gönder</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+

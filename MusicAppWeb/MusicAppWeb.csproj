@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\AdminLTE-4.0.0-beta3\**" />
+    <Content Remove="wwwroot\AdminLTE-4.0.0-beta3\**" />
+    <EmbeddedResource Remove="wwwroot\AdminLTE-4.0.0-beta3\**" />
+    <None Remove="wwwroot\AdminLTE-4.0.0-beta3\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\AdminLTE-3.0.4\.vs\AdminLTE-3.0.4\v17\DocumentLayout.json" />
+    <Content Include="wwwroot\AdminLTE-3.0.4\.vs\ProjectSettings.json" />
+    <Content Include="wwwroot\AdminLTE-3.0.4\.vs\VSWorkspaceState.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\User\Controllers\" />
+    <Folder Include="Areas\User\Data\" />
+    <Folder Include="Areas\User\Models\" />
+    <Folder Include="Areas\User\Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v2-4-x.md" />
+    <None Include="wwwroot\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v3-x.md" />
+    <None Include="wwwroot\AdminLTE-3.0.4\.github\ISSUE_TEMPLATE\feature-request-for-adminlte-v3-x.md" />
+    <None Include="wwwroot\AdminLTE-3.0.4\.vs\AdminLTE-3.0.4\config\applicationhost.config" />
+    <None Include="wwwroot\AdminLTE-3.0.4\.vs\AdminLTE-3.0.4\FileContentIndex\99e8eefd-dde8-418d-989c-dcd1070bc0b5.vsidx" />
+    <None Include="wwwroot\AdminLTE-3.0.4\.vs\AdminLTE-3.0.4\FileContentIndex\ccfa1d74-156c-430a-8109-28edf66fc922.vsidx" />
+    <None Include="wwwroot\AdminLTE-3.0.4\.vs\AdminLTE-3.0.4\v17\workspaceFileList.bin" />
+    <None Include="wwwroot\AdminLTE-3.0.4\.vs\slnx.sqlite" />
+  </ItemGroup>
+
+</Project>
