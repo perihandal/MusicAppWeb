@@ -12,8 +12,8 @@ using MusicAppWeb.AppContext;
 namespace MusicAppWeb.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250305183137_mggenre")]
-    partial class mggenre
+    [Migration("20250310125544_addsingerid")]
+    partial class addsingerid
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,7 +245,7 @@ namespace MusicAppWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("MusicAppWeb.Models.ReleaserCompany", b =>
@@ -321,11 +321,12 @@ namespace MusicAppWeb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RelaseDate")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SingerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SongFilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

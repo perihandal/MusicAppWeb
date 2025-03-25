@@ -1,15 +1,126 @@
-﻿
+﻿@using MusicAppWeb.CrudModels
+@model List<SongModelForList>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
 }
 
-<h1>Index</h1>
-<div class="content-wrapper">
-    
-    <section class="content">
-        burası
-    </section>
- 
-</div>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+<div class="container">
+     <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div class="button-row">
+                    <a class="btn btn-sm btn-primary" href="/Admin/Song/AddSong">Ekle</a>
+       
+                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Sil</button>
+                    <button class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i> Güncelle</button>
+                    <button class="btn btn-sm btn-info"><i class="bi bi-search"></i> Ara</button>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@ViewBag.SongCount</h3>
+
+                    <p> Şarkı Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="bi bi-music-note"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@ViewBag.SingerCount<sup style="font-size: 20px"></sup></h3>
+
+                    <p>Şarkıcı Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="bi bi-file-music-fill"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>@ViewBag.AlbumCount</h3>
+
+                    <p>Albüm Sayısı</p>
+                </div>
+                <div class="icon">
+                    <i class="bi bi-disc"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>65</h3>
+
+                    <p>Unique Visitors</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Şarkı Adı</th>
+            <th>Sanatçı</th>
+            <th>Albüm</th>
+            <th>Yayın Tarihi</th>
+            <th>Kapak Fotoğrafı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var item in Model)
+            {
+                    <tr>
+
+                        <td>@item.Name</td>
+                        <td>@item.SingerName</td>
+                        <td>@item.AlbumName</td>
+                        <td>@item.ReleaseDate</td>
+
+                         <td> <img src="data:image/jpeg;base64,@item.Picture" alt="@item.AlbumName" width="50"></td>
+
+                        <td>
+                        <a class="btn btn-warning btn-sm fas fa-edit " href="/Admin/Song/Update/@item.Id"> Güncelle</a>
+                        <form method="post" action="/Admin/Song/Remove/@item.Id" style="display: inline;">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Bu şarkıyı silmek istediğinize emin misiniz?');">
+                                <i class="fas fa-trash-alt"></i> Sil
+                            </button>
+                        </form>
+
+
+                            <button class="btn btn-primary btn-sm"><i class="fas fa-headphones"></i> Dinle</button>
+                        </td>
+                    </tr>
+            }
+
+
+    </tbody>
+</table>
+</div>

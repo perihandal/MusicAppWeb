@@ -1,0 +1,36 @@
+﻿@using MusicAppWeb.Models
+@model List<Song>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Şarkı Adı</th>
+            <th>Sanatçı</th>
+            <th>Albüm</th>
+            <th>Yayın Tarihi</th>
+            <th>Kapak Fotoğrafı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.Name</td>
+                <td>@item.Album.Singer.Name</td>
+                <td>@item.Album.Name</td>
+                <td>@item.RelaseDate</td>
+
+                <td> <img src="data:image/jpeg;base64,@item.Album.PictureBase64" alt="image" width="50"></td>
+
+                <td>
+                    <a class="btn btn-warning btn-sm fas fa-edit " href="/Admin/Song/Update/@item.Id"> Güncelle</a>
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Sil</button>
+                    <button class="btn btn-primary btn-sm"><i class="fas fa-headphones"></i> Dinle</button>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>

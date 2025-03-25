@@ -12,8 +12,8 @@ using MusicAppWeb.AppContext;
 namespace MusicAppWeb.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250302182734_initial_mig")]
-    partial class initial_mig
+    [Migration("20250309172146_mg_initial")]
+    partial class mg_initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,6 +228,26 @@ namespace MusicAppWeb.Migrations
                     b.ToTable("ContactUs");
                 });
 
+            modelBuilder.Entity("MusicAppWeb.Models.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genres");
+                });
+
             modelBuilder.Entity("MusicAppWeb.Models.ReleaserCompany", b =>
                 {
                     b.Property<int>("Id")
@@ -290,6 +310,9 @@ namespace MusicAppWeb.Migrations
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
 
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -302,12 +325,13 @@ namespace MusicAppWeb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SongFilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Songs");
                 });
@@ -504,7 +528,15 @@ namespace MusicAppWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MusicAppWeb.Models.Genre", "Genre")
+                        .WithMany("Songs")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Album");
+
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("MusicAppWeb.Models.SongListeningRate", b =>
@@ -519,6 +551,11 @@ namespace MusicAppWeb.Migrations
                 });
 
             modelBuilder.Entity("MusicAppWeb.Models.Album", b =>
+                {
+                    b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("MusicAppWeb.Models.Genre", b =>
                 {
                     b.Navigation("Songs");
                 });

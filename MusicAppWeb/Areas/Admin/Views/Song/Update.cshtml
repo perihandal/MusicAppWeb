@@ -1,0 +1,83 @@
+﻿@using MusicAppWeb.CrudModels
+@model UpdateSongModel
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
+}
+
+<h1>Şarkı Güncelle</h1>
+<div class="container mt-5">
+    <h2 class="mb-4">Müzik Güncelleme Formu</h2>
+
+    @if (TempData["success"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["success"]
+        </div>
+    }
+
+    <form asp-controller="Song" asp-action="Update" method="post">
+        <input type="hidden" value="@Model.Id" name="Id" asp-for="Id" />
+
+        <div class="mb-3">
+            <label for="songName" class="form-label">Şarkı Adı</label>
+            <input type="text" name="Name" class="form-control" id="songName"
+                   placeholder="Şarkı adını girin" value="@Model.Name">
+        </div>
+
+        <div class="mb-3">
+            <label for="artist" class="form-label">Sanatçı</label>
+            <select name="SingerId" class="form-select" id="artist">
+                <option value="">Sanatçı Seçin</option>
+             @*    @foreach (var artist in ViewBag.Artists)
+                {
+                    <option value="@artist.Id" @(artist.Id == Model.SingerId ? "selected" : "")>
+                        @artist.Name @artist.Surname
+                    </option>
+                } *@
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="albums" class="form-label">Albüm</label>
+            <select name="AlbumId" class="form-select" id="albums">
+                <option value="">Albüm Seçin</option>
+                @foreach (var album in ViewBag.Albums)
+                {
+                    <option value="@album.Id" @(album.Id == Model.AlbumId ? "selected" : "")>
+                        @album.Name
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="genre" class="form-label">Tür</label>
+            <select name="GenreId" class="form-select" id="genre">
+                <option value="">Tür Seçin</option>
+                @foreach (var genre in ViewBag.Genres)
+                {
+                    <option value="@genre.Id" @(genre.Id == Model.GenreId ? "selected" : "")>
+                        @genre.Name
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="releaseDate" class="form-label">Yayın Tarihi</label>
+            <input type="date" name="ReleaseDate" class="form-control"
+                   value="@(DateTime.TryParse(Model.ReleaseDate, out var date) ? date.ToString("yyyy-MM-dd") : "")">
+
+        </div>
+
+        <div class="col d-flex justify-content-center">
+            <input id="SongFilePath" type="file" name="SongFilePath" class="form-control w-50" aria-label="Dosya Seç">
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Güncelle</button>
+    </form>
+</div>
+
+

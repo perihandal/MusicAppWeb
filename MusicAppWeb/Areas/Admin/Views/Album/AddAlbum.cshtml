@@ -1,0 +1,43 @@
+﻿@using MusicAppWeb.CrudModels
+@model AlbumModelForAdding
+@{
+    ViewData["Title"] = "AddAlbum";
+    Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Albüm Bilgileri Formu</h2>
+
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="Name">Albüm Adı:</label>
+            <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+        </div>
+
+        <div class="form-group">
+            <label for="ReleaseDate">Çıkış Tarihi:</label>
+            <input type="date" class="form-control" id="ReleaseDate" name="ReleaseDate" value="@Model.ReleaseDate" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Description">Açıklama:</label>
+            <textarea class="form-control" id="Description" name="Description" required>@Model.Description</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="SingerId">Sanatçı:</label>
+            <select class="form-control" id="SingerId" name="SingerId" required>
+                @foreach (var artist in ViewBag.Artist)
+                {
+                    <option value="@artist.Id">@artist.Name</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Albüm Ekle</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+

@@ -242,7 +242,7 @@ namespace MusicAppWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genre");
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("MusicAppWeb.Models.ReleaserCompany", b =>
@@ -318,11 +318,12 @@ namespace MusicAppWeb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RelaseDate")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SingerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SongFilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

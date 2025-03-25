@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MusicAppWeb.Migrations
 {
     /// <inheritdoc />
-    public partial class initial_mig : Migration
+    public partial class mg_initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,6 +80,20 @@ namespace MusicAppWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ContactUs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Genres",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genres", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,7 +272,8 @@ namespace MusicAppWeb.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RelaseDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AlbumId = table.Column<int>(type: "int", nullable: false),
-                    SongFilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GenreId = table.Column<int>(type: "int", nullable: false),
+                    SongFilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -268,6 +283,12 @@ namespace MusicAppWeb.Migrations
                         name: "FK_Songs_Albums_AlbumId",
                         column: x => x.AlbumId,
                         principalTable: "Albums",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Songs_Genres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -351,6 +372,11 @@ namespace MusicAppWeb.Migrations
                 name: "IX_Songs_AlbumId",
                 table: "Songs",
                 column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Songs_GenreId",
+                table: "Songs",
+                column: "GenreId");
         }
 
         /// <inheritdoc />
@@ -391,6 +417,9 @@ namespace MusicAppWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "Albums");
+
+            migrationBuilder.DropTable(
+                name: "Genres");
 
             migrationBuilder.DropTable(
                 name: "ReleaserCompanies");

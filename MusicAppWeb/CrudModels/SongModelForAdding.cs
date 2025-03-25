@@ -8,9 +8,11 @@ namespace MusicAppWeb.CrudModels
         [StringLength(60)]
         [Required]
         public string Name { get; set; }
-        public string RelaseDate { get; set; }
+        public string ReleaseDate { get; set; }
         [Required]
         public int AlbumId { get; set; }
+        [Required]
+        public int SingerId { get; set; }
         [Required]
         public int GenreId { get; set; }
        
